@@ -68,8 +68,11 @@
                                     type="number" groupingUsed="true" value="${ item.price }"/>đ</strong>
                         </p>
                         <h4>
-                            <a class="shopBtn" href="#" title="add to cart"> Add to cart
-                            </a>
+                                <%--                            <a class="shopBtn" href="#" title="add to cart"> Add to cart--%>
+                                <%--                            </a>--%>
+                            <button type="submit" class="shopBtn"><span class=" icon-shopping-cart"></span> Thêm giỏ
+                                hàng
+                            </button>
                         </h4>
                         <div class="actionList">
                             <a class="pull-left" href="#">Add to Wish List </a> <a

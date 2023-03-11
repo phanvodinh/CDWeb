@@ -14,12 +14,13 @@ $(document).on('click', '#remove-cart', function (event) {
     event.preventDefault();
     var productID = $(this).data('productID').data('remove-cart')
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: '/deletecart',
-        data: {'productId': productId},
+        data: {'id': id},
         success: function (response) {
             // Cập nhật giỏ hàng trên trang
-            $('#cart-items').html(response);
+          //  $('#cart-items').html(response);
+            alert('Item removed from cart');
         }
     })
         .fail(function () {

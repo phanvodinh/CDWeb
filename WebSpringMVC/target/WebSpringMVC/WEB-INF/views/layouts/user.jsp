@@ -68,7 +68,7 @@
                 <a href="#"><span class="icon-user"></span> My Account</a>
                 <a href="register.html"><span class="icon-edit"></span> Free Register </a>
                 <a href="contact.html"><span class="icon-envelope"></span> Contact us</a>
-                <a href="cart.html"><span class="icon-shopping-cart"></span> ${ totalCartQuantity} Item(s) - <span
+                <a href="<c:url value="/gio-hang"/>"><span class="icon-shopping-cart"></span> ${ totalCartQuantity} Item(s) - <span
                         class="badge badge-warning"> <fmt:formatNumber
                         type="number" groupingUsed="true" value="${ totalCartPrice}"/>đ</span></a>
             </div>

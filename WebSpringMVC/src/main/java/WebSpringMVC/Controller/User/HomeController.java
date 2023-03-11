@@ -14,8 +14,8 @@ public class HomeController extends BaseController {
         mvShare.addObject("slides", _home.getDataSlides());
         mvShare.addObject("categorys", _home.getDataCategorys());
         mvShare.addObject("products", _home.getDataProducts());
-      //  mvShare.setViewName("user/index");
-        mvShare.setViewName("user/cart/list_cart");
+        mvShare.setViewName("user/index");
+       // mvShare.setViewName("user/cart/list_cart");
         return mvShare;
     }
 

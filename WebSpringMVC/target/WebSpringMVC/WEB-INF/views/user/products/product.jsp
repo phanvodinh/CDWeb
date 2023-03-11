@@ -24,7 +24,7 @@
 <%--body section--%>
 <div class="row product-content">
     <%--    <h2>${someProductByCategoryID.size()}</h2>--%>
-    <h2>${Cart.size()}</h2>
+    <%--    <h2>${Cart.size()}</h2>--%>
     <div id="sidebar" class="span3">
         <div class="well well-small">
             <ul class="nav nav-list">
@@ -117,7 +117,8 @@
                     <h3>${detailProduct.name}</h3>
                     <hr class="soft"/>
 
-                    <form class="form-horizontal qtyFrm" method="get" action="<c:url  value="/addcart/${detailProduct.id_product}"/>">
+                    <form class="form-horizontal qtyFrm" method="get"
+                          action="<c:url  value="/addcart/${detailProduct.id_product}"/>">
                         <div class="control-group">
                             <label class="control-label"><span><fmt:formatNumber
                                     type="number" groupingUsed="true" value="${ detailProduct.price }"/>đ</span></label>
@@ -142,7 +143,8 @@
                         <p>Nowadays the lingerie industry is one of the most successful business spheres.
                             Nowadays the lingerie industry is one of ...
                         <p>
-                            <button type="submit" class="shopBtn"><span class=" icon-shopping-cart"></span> Thêm giỏ hàng
+                            <button type="submit" class="shopBtn"><span class=" icon-shopping-cart"></span> Thêm giỏ
+                                hàng
                             </button>
                     </form>
                 </div>

@@ -8,9 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <head>
     <title>List Cart</title>
-    <script src="index.js"/>
+    <%--    <script src="./webjars/jquery/3.6.0/jquery.js" type="text/javascript"></script>--%>
+    <%--    <script src="index.js"/>--%>
 </head>
 <body>
 <div class="row">
@@ -20,7 +22,7 @@
             <li class="active">Check Out</li>
         </ul>
         <div class="well well-small">
-            <h1>Check Out <small class="pull-right"> 2 Items are in the cart </small></h1>
+            <h1>Check Out <small class="pull-right"> ${Cart.size()} Items are in the cart </small></h1>
             <hr class="soften"/>
 
             <table class="table table-bordered table-condensed">
@@ -36,44 +38,61 @@
                 </tr>
                 </thead>
                 <tbody>
+
+
                 <c:forEach var="item" items="${ Cart }">
                     <tr id="cart-items">
-                        <td><img width="100" src="assets/img/e.jpg" alt=""></td>
-                        <td>Items name here<br>Carate : 22<br>Model : n/a</td>
+                        <td><img width="100" src="<c:url value="/assets/user/img/${item.value.productsDto.img}" />"
+                                 alt=""></td>
+                        <td>${item.value.productsDto.name}<br>Carate : 22<br>Model : n/a</td>
                         <td> -</td>
                         <td><span class="shopBtn"><span class="icon-ok"></span></span></td>
-                        <td>$50.00</td>
+                        <td><fmt:formatNumber
+                                type="number" groupingUsed="true" value="${item.value.productsDto.price}"/>đ
+                        </td>
                         <td>
                             <input class="span1" style="max-width:34px" placeholder="1" id="appendedInputButtons"
                                    size="16" type="number" min="0" max="1000" value="2">
                             <div class="input-append">
-                                <button name="down-product" class="btn btn-mini" type="button">-</button>
-                                <button name="up-product" class="btn btn-mini" type="button"> +</button>
+                                    <%--                                <button name="down-product" class="btn btn-mini" type="button">-</button>--%>
+                                    <%--                                <button name="up-product" class="btn btn-mini" type="button"> +</button>--%>
                                     <%--   <button href="<c:url value="/editcart/1"/>" class="btn btn-mini btn-danger" type="button"><span class="icon-remove" ></span>
                                        </button>--%>
-                                <a href="<c:url value="/editCart/1"/>" class="btn btn-mini btn-danger" type="button" id="remove-cart">
+                                <a href="<c:url value="/editcart/1"/>" class="btn btn-mini btn-danger"
+                                   type="button">
+                                    <span class="icon-edit"></span>
+                                </a>
+                                <a href="<c:url value="deletecart/${item.value.productsDto.id_product}"/>"
+                                   class="btn btn-mini btn-danger"
+                                   type="button"
+                                   id="remove-cart">
                                     <span class="icon-remove"></span>
                                 </a>
+                                    <%--                                href="<c:url value="/deleteCart/1"/>"--%>
                             </div>
                         </td>
-                        <td>$100.00</td>
+                        <td><fmt:formatNumber
+                                type="number" groupingUsed="true" value="${item.value.totalPrice}"/>đ
+                        </td>
                     </tr>
                 </c:forEach>
+                <%--                <tr>--%>
+                <%--                    <td colspan="6" class="alignR">Total products:</td>--%>
+                <%--                    <td> $448.42</td>--%>
+                <%--                </tr>--%>
+                <%--                <tr>--%>
+                <%--                    <td colspan="6" class="alignR">Total products:</td>--%>
+                <%--                    <td> $448.42</td>--%>
+                <%--                </tr>--%>
+                <%--                <tr>--%>
+                <%--                    <td colspan="6" class="alignR">Total products:</td>--%>
+                <%--                    <td> $448.42</td>--%>
+                <%--                </tr>--%>
                 <tr>
                     <td colspan="6" class="alignR">Total products:</td>
-                    <td> $448.42</td>
-                </tr>
-                <tr>
-                    <td colspan="6" class="alignR">Total products:</td>
-                    <td> $448.42</td>
-                </tr>
-                <tr>
-                    <td colspan="6" class="alignR">Total products:</td>
-                    <td> $448.42</td>
-                </tr>
-                <tr>
-                    <td colspan="6" class="alignR">Total products:</td>
-                    <td class="label label-primary"> $448.42</td>
+                    <td class="label label-success"><fmt:formatNumber
+                            type="number" groupingUsed="true" value="${totalCartPrice}"/>đ
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -92,3 +111,35 @@
 
 </body>
 
+<script>
+    var xhttp;
+
+    // initRequest() dùng để khỏi tạo ajax cho phù hợp với từng trình duyệt
+    function initRequest() {
+        if (window.XMLHttpRequest) {
+            // dành cho hầu hết trình duyệt
+            xhttp = new XMLHttpRequest();
+
+        }//dành cho trình duyệt InternetExporer
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    //ajax xóa sp khỏi giỏ hàng- chưa xong
+    $(document).on('click', '#remove-cart', function (event) {
+        event.preventDefault();
+        var productID = $(this).data('id').data('#remove-cart')
+        $.ajax({
+            type: 'POST',
+            url: '/deletecart',
+            data: {'id': productID},
+            success: function (response) {
+                // Cập nhật giỏ hàng trên trang
+                //  $('#cart-items').html(response);
+                alert('Item removed from cart');
+            }
+        })
+            .fail(function () {
+                alert('Failed to remove product from cart');
+            });
+    })
+</script>
