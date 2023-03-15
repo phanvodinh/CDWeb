@@ -46,7 +46,7 @@ public class CartController extends BaseController {
         return "redirect:" + request.getHeader("Referer");
     }
 
-    @RequestMapping(value = "editcart/{id}")
+    @RequestMapping(value = "editcart/{id}/{quantity}")
     public String editCart(HttpServletRequest request, HttpSession session, @PathVariable long id, @PathVariable int quantity) {
         HashMap<Long, CartDto> cart = (HashMap<Long, CartDto>) session.getAttribute("Cart");
         if (cart == null) {
