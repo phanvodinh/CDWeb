@@ -85,16 +85,16 @@
                         <c:forEach items="${lsCate}" var="cate">
                             <tr>
                                 <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td>${cate.id}</td>
+                                <td id="cateID">${cate.id}</td>
                                 <td>${cate.name}</td>
                                 <td>${cate.description}
                                 </td>
                                     <%--                                <td><span class="badge bg-danger">Sa thải</span></td>--%>
                                 <td>
-                                    <a href="<c:url value="/admin/deleteCate/${cate.id}"/>">
-                                            <%--                                                                                <a class="delete-link" data-id="${cate.id}">--%>
+                                        <%--                                    <a href="<c:url value="/admin/deleteCate/${cate.id}"/>">--%>
+                                    <a class="delete-link" data-id="${cate.id}">
                                         <button class="btn btn-primary btn-sm trash  "
-                                                type="button" title="Xóa"><i
+                                                id="btnDel" type="button" title="Xóa"><i
                                                 class="fas fa-trash-alt"></i></button>
                                         <a/>
                                         <button class="btn-delete" type="button" title="Xóa"><i
@@ -113,31 +113,30 @@
 </main>
 <!-- Essential javascripts for application to work-->
 <%@include file="layout/footer.jsp" %>
-<script type="text/javascript">
+<script>
     $(document).ready(function () {
-        $(".delete-link").click(function (event) {
-            event.preventDefault();
-            var categoryId = $(this).data("data-id");
-            var tr = $(this).closest("tr");
-            $.ajax({
-                url: "/admin/deleteCate/" + categoryId,
-                type: "DELETE",
-                success: function (response) {
-                    if (response === "success") {
-                        tr.remove();
-                        // location.reload(false);
-                    } else {
-                        alert("An error occurred while deleting the category.");
+        // Xử lý sự kiện khi nhấn nút Xóa
+        $("#sampleTable").on("click", "#btnDel", function () {
+            // Lấy ID của category
+            var categoryId = $(this).closest("tr").find("td:eq(1)").text();
+            //  var categoryId = $("#cateID").text();
+            // Xác nhận việc xóa category
+            if (confirm("Bạn có chắc chắn muốn xóa category này?")) {
+                // Gửi request DELETE đến URL /admin/category/${id}
+                $.ajax({
+                    url: "http://localhost:8080/WebSpringMVC_war/admin/deleteCate/" + categoryId,
+                    type: "GET",
+                    success: function (response) {
+                        // Xóa category khỏi danh sách
+                        $(this).closest("tr").remove();
+                        location.reload(true);
+                    },
+                    error: function (xhr, status, error) {
+                        alert(categoryId);
+                        alert("Error: " + error);
                     }
-                },
-                error: function () {
-                    alert("An error occurred while deleting the category.");
-                }
-
-
-            });
-
-
+                });
+            }
         });
     });
 </script>
