@@ -92,7 +92,7 @@
                                     <%--                                <td><span class="badge bg-danger">Sa thải</span></td>--%>
                                 <td>
                                     <a href="<c:url value="/admin/deleteCate/${cate.id}"/>">
-<%--                                    <a class="delete-link" data-id="${cate.id}">--%>
+                                            <%--                                                                                <a class="delete-link" data-id="${cate.id}">--%>
                                         <button class="btn btn-primary btn-sm trash  "
                                                 type="button" title="Xóa"><i
                                                 class="fas fa-trash-alt"></i></button>
@@ -125,6 +125,7 @@
                 success: function (response) {
                     if (response === "success") {
                         tr.remove();
+                        // location.reload(false);
                     } else {
                         alert("An error occurred while deleting the category.");
                     }
@@ -132,7 +133,11 @@
                 error: function () {
                     alert("An error occurred while deleting the category.");
                 }
+
+
             });
+
+
         });
     });
 </script>
