@@ -24,8 +24,11 @@
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>/WEB-INF/demo-config-servlet.xml</param-value>
+
         </init-param>
+
     </filter>
+
 
     <filter-mapping>
         <filter-name>sitemesh</filter-name>

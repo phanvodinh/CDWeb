@@ -64,9 +64,16 @@
                     <a href="#"><span class="icon-youtube"></span></a>
                     <a href="#"><span class="icon-tumblr"></span></a>
                 </div>
-                <a class="active" href="index.html"> <span class="icon-home"></span> Home</a>
-                <a href="#"><span class="icon-user"></span> My Account</a>
-                <a href="register.html"><span class="icon-edit"></span> Free Register </a>
+                <a class="active" href="<c:url value="/"/> "> <span class="icon-home"></span> Home</a>
+                <c:if test="${ not empty loginInfo}">
+                    <a href="#"><span class="icon-user"></span> ${loginInfo.displayName}</a>
+                    <a href="<c:url value="/dang-xuat"/>"><span class="icon-edit"></span>LogOut </a>
+
+                </c:if>
+                <c:if test="${ empty loginInfo}">
+                    <a href="<c:url value="/dang-ky"/>"><span class="icon-edit"></span>SignUp </a>
+                </c:if>
+                <%--                <a href="<c:url value="/dang-ky"/> "><span class="icon-edit"></span> Free Register </a>--%>
                 <a href="contact.html"><span class="icon-envelope"></span> Contact us</a>
                 <a href="<c:url value="/gio-hang"/>"><span class="icon-shopping-cart"></span> ${ totalCartQuantity}
                     Item(s) - <span

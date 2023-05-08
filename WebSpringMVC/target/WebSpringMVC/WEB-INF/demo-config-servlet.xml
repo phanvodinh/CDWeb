@@ -31,7 +31,7 @@ http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd"
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-        <property name="url" value="jdbc:mysql://localhost:3306/diamond_shop"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/diamond_shop?characterEncoding=UTF-8"></property>
         <property name="username" value="root"></property>
         <property name="password" value=""></property>
 
