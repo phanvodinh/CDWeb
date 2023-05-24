@@ -1,12 +1,13 @@
 package WebSpringMVC.Controller.User;
 
 import WebSpringMVC.Dto.CartDto;
+import WebSpringMVC.Entity.Bills;
+import WebSpringMVC.Entity.User;
+import WebSpringMVC.Service.User.BillsImpl;
 import WebSpringMVC.Service.User.CartImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,8 @@ import java.util.HashMap;
 public class CartController extends BaseController {
     @Autowired
     private CartImpl cartService = new CartImpl();
+    @Autowired
+    private BillsImpl billsService = new BillsImpl();
 
     @RequestMapping(value = "gio-hang")
     public ModelAndView index() {
@@ -74,5 +77,32 @@ public class CartController extends BaseController {
 
         //  return "redirect:/chi-tiet/" + id;
         return "redirect:" + request.getHeader("Referer");
+    }
+
+    @GetMapping("checkout")
+    public ModelAndView checkout(HttpServletRequest request, HttpSession session) {
+        mvShare.setViewName("user/bills/checkout");
+        Bills bills = new Bills();
+        User loginInfo = (User) session.getAttribute("loginInfo");
+        if (loginInfo != null) {
+
+            bills.setAddress(loginInfo.getAddress());
+            bills.setDisplay_name(loginInfo.getDisplayName());
+            bills.setUser(loginInfo.getUser());
+        }
+        mvShare.addObject("bills", bills);
+        return mvShare;
+    }
+
+    @PostMapping("checkout")
+    public String checkOutBills(HttpServletRequest request, HttpSession session, @ModelAttribute("bills") Bills bills) {
+        bills.setQuantity((int) session.getAttribute("totalCartQuantity"));
+        bills.setTotal((double) session.getAttribute("totalCartPrice"));
+        if (billsService.addBill(bills) > 0) {
+            HashMap<Long, CartDto> carts = (HashMap<Long, CartDto>) session.getAttribute("Cart");
+            billsService.addBillDetail(carts);
+        }
+        session.removeAttribute("Cart");
+        return "redirect:gio-hang";
     }
 }

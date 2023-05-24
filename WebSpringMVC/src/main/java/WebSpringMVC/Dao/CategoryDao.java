@@ -25,8 +25,9 @@ public class CategoryDao extends BaseDao {
     }
 
     public void saveCate(Category category) {
-        String sql = "INSERT INTO categorys (name, description) VALUES (?,?)";
-        template.update(sql, category.getName(), category.getDescription());
+        String sql = "INSERT INTO categorys (id, name, description) VALUES (?,?,?)";
+        int id = getNextId();
+        template.update(sql, id, category.getName(), category.getDescription());
     }
 
     public void delete(int id) {
@@ -34,12 +35,31 @@ public class CategoryDao extends BaseDao {
         Object[] args = {id};
         template.update(sql, args);
     }
+
     public Category getById(int id) {
         String sql = "SELECT * FROM categorys WHERE id = ?";
-        Object[] args = { id };
+        Object[] args = {id};
         List<Category> categories = template.query(sql, args, getRow());
         return categories.isEmpty() ? null : categories.get(0);
     }
+
+    private int getNextId() {
+        String sql = "SELECT MAX(id) FROM categorys";
+        Integer maxId = template.queryForObject(sql, Integer.class);
+        return maxId != null ? maxId + 1 : 1;
+    }
+
+    public void updateCategory(Category category) {
+        String sql = "UPDATE categorys SET name=?, description=? WHERE id=?";
+        template.update(sql, category.getName(), category.getDescription(), category.getId());
+    }
+
+    public Category getCategoryById(int id) {
+        String sql = "SELECT * FROM categorys WHERE id=?";
+        return template.queryForObject(sql, getRow(), id);
+        //  return template.queryForObject(sql, new Object[]{id}, getRow());
+    }
+
     private RowMapper<Category> getRow() {
         return new BeanPropertyRowMapper<Category>(Category.class);
     }

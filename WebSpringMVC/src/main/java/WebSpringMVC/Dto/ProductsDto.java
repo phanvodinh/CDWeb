@@ -6,6 +6,8 @@ public class ProductsDto {
 
     private long id_product;
     private int id_category;
+    private String nameCategory;
+
     private String sizes;
     private String name;
     private double price;
@@ -14,6 +16,7 @@ public class ProductsDto {
     private boolean highlight;
     private boolean new_product;
     private String details;
+    private String status;
     private long id_color;
     private String name_color;
     private String code_color;
@@ -46,6 +49,30 @@ public class ProductsDto {
         this.updated_at = updated_at;
     }
 
+    public ProductsDto(long id_product, int id_category, String nameCategory, String sizes, String name,
+                       double price, int sale, String title, boolean highlight, boolean new_product,
+                       String details, String status, long id_color, String name_color, String code_color,
+                       String img, Date created_at, Date updated_at) {
+        this.id_product = id_product;
+        this.id_category = id_category;
+        this.nameCategory = nameCategory;
+        this.sizes = sizes;
+        this.name = name;
+        this.price = price;
+        this.sale = sale;
+        this.title = title;
+        this.highlight = highlight;
+        this.new_product = new_product;
+        this.details = details;
+        this.status = status;
+        this.id_color = id_color;
+        this.name_color = name_color;
+        this.code_color = code_color;
+        this.img = img;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
+
     public long getId_product() {
         return id_product;
     }
@@ -60,6 +87,14 @@ public class ProductsDto {
 
     public void setId_category(int id_category) {
         this.id_category = id_category;
+    }
+
+    public String getNameCategory() {
+        return nameCategory;
+    }
+
+    public void setNameCategory(String nameCategory) {
+        this.nameCategory = nameCategory;
     }
 
     public String getSizes() {
@@ -124,6 +159,14 @@ public class ProductsDto {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public long getId_color() {

@@ -39,6 +39,9 @@ public class ProductDao extends BaseDao {
 
 
     }
+    public String getSQLString(){
+        return sqlString().toString();
+    }
 
     private String sqlProduct(boolean newProduct, boolean highligh) {
         StringBuffer sql = sqlString();
@@ -59,6 +62,12 @@ public class ProductDao extends BaseDao {
         }
         return sql.toString();
 
+    }
+
+    public List<ProductsDto> getAllProduct() {
+        String sql = sqlString().toString();
+        List<ProductsDto> list = template.query(sql, new ProductsDtoMapper());
+        return list;
     }
 
     private StringBuffer sqlProductsByID(int id) {

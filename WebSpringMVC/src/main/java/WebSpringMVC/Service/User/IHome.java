@@ -26,4 +26,13 @@ public interface IHome {
     @Autowired
     void delete(int id);
 
+    @Autowired
+    void saveCate(Category category);
+
+    @Autowired
+    void updateCategory(Category category);
+
+    @Autowired
+    Category getCategoryById(int id);
+
 }

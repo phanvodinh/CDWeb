@@ -3,12 +3,15 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/edit/editProduct.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/edit" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/formAddCategory.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/table-data-product.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/tableCategory.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/tableProduct.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/layouts/user.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/layouts" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/layouts/user/header.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/layouts/user" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/account/register.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/account" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/bills/checkout.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/bills" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/cart/list_cart.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/cart" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/products/category.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/user/products" />

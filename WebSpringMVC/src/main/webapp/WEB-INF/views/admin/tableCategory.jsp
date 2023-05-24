@@ -4,6 +4,7 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <title>Danh sách đơn hàng | Quản trị Admin</title>
     <%@include file="layout/header.jsp" %>
 
@@ -32,7 +33,7 @@
                     <div class="row element-button">
                         <div class="col-sm-2">
 
-                            <a class="btn btn-add btn-sm" href="form-add-bi-cam.html" title="Thêm"><i
+                            <a class="btn btn-add btn-sm" href="<c:url value="/admin/AddCate"/>" title="Thêm"><i
                                     class="fas fa-plus"></i>
                                 Tạo mới</a>
                         </div>
@@ -74,9 +75,7 @@
                             <th>ID</th>
                             <th>Tên Danh Mục</th>
                             <th>Mô tả</th>
-                            <%--                            <th>Lý do cấm</th>--%>
-                            <%--                            <th>Tình trạng</th>--%>
-                            <%--                            <th>Chức năng</th>--%>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -92,15 +91,21 @@
                                     <%--                                <td><span class="badge bg-danger">Sa thải</span></td>--%>
                                 <td>
                                         <%--                                    <a href="<c:url value="/admin/deleteCate/${cate.id}"/>">--%>
+                                        <%--button delete category--%>
                                     <a class="delete-link" data-id="${cate.id}">
                                         <button class="btn btn-primary btn-sm trash  "
                                                 id="btnDel" type="button" title="Xóa"><i
                                                 class="fas fa-trash-alt"></i></button>
                                         <a/>
-                                        <button class="btn-delete" type="button" title="Xóa"><i
-                                                class="fas fa-trash-alt"></i></button>
-                                        <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i
-                                                class="fa fa-edit"></i></button>
+                                            <%--button edit category--%>
+                                        <a href="<c:url value="category/${cate.id}/editCate"/>">
+                                            <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i
+                                                    data-toggle="modal"
+                                                    data-id="${cate.id}" id="edit-category" data-target="#ModalUP"
+                                                    class="fa fa-edit" ></i></button>
+
+
+                                        </a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -111,6 +116,68 @@
         </div>
     </div>
 </main>
+<%--MODAL--%>
+<%--<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" div--%>
+<%--     data-keyboard="false">--%>
+<%--    &lt;%&ndash;    <form action="<c:url value="category/${cateByID.id}/editCate"/>" method="post">&ndash;%&gt;--%>
+<%--    <form>--%>
+<%--        <div class="modal-dialog modal-dialog-centered" role="document">--%>
+<%--            <div class="modal-content">--%>
+
+<%--                <div class="modal-body">--%>
+<%--                    <div class="row">--%>
+<%--                        <div class="form-group  col-md-12">--%>
+<%--          <span class="thong-tin-thanh-toan">--%>
+<%--            <h5>Chỉnh sửa thông tin sản phẩm cơ bản</h5>--%>
+<%--          </span>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="row">--%>
+<%--                        <div class="form-group col-md-6">--%>
+<%--                            <label class="control-label">Mã sản phẩm </label>--%>
+<%--                            <input class="form-control" type="number" value="">--%>
+<%--                        </div>--%>
+<%--                        <div class="form-group col-md-6">--%>
+<%--                            <label class="control-label">Tên sản phẩm</label>--%>
+<%--                            <input class="form-control" id="name" type="text" value="">--%>
+<%--                        </div>--%>
+<%--                        <div class="form-group  col-md-6">--%>
+<%--                            <label class="control-label">Số lượng</label>--%>
+<%--                            <input class="form-control" id="description" type="text" value="20">--%>
+<%--                        </div>--%>
+
+
+<%--                    </div>--%>
+<%--                    <BR>--%>
+<%--                    <a href="#" style="    float: right;--%>
+<%--    font-weight: 600;--%>
+<%--    color: #ea0000;">Chỉnh sửa sản phẩm nâng cao</a>--%>
+<%--                    <BR>--%>
+<%--                    <BR>--%>
+<%--                    <button class="btn btn-save" type="submit">Lưu lại</button>--%>
+<%--                    <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>--%>
+<%--                    <BR>--%>
+<%--                </div>--%>
+<%--                <div class="modal-footer">--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </form>--%>
+<%--</div>--%>
+
+<%--New Modal--%>
+<div id="edit-modal" style="display: none;">
+    <form id="edit-form" action="" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        <br>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea>
+        <br>
+        <input type="submit" value="Save">
+    </form>
+</div>
+
 <!-- Essential javascripts for application to work-->
 <%@include file="layout/footer.jsp" %>
 <script>
@@ -129,7 +196,7 @@
                     success: function (response) {
                         // Xóa category khỏi danh sách
                         $(this).closest("tr").remove();
-                        location.reload(true);
+                        location.reload(false);
                     },
                     error: function (xhr, status, error) {
                         alert(categoryId);
@@ -140,28 +207,36 @@
         });
     });
 </script>
-<%--<script type="text/javascript">--%>
-<%--    $(document).ready(function() {--%>
-<%--        $(".btn-delete").click(function(event) {--%>
-<%--            event.preventDefault();--%>
-<%--            var categoryId = $(this).closest("tr").find("td:eq(1)").text();--%>
-<%--            var tr = $(this).closest("tr");--%>
-<%--            $.ajax({--%>
-<%--                url: "/admin/categories/delete/" + categoryId,--%>
-<%--                type: "DELETE",--%>
-<%--                success: function(response) {--%>
-<%--                    if (response === "success") {--%>
-<%--                        tr.remove();--%>
-<%--                    } else {--%>
-<%--                        alert("An error occurred while deleting the category.");--%>
-<%--                    }--%>
-<%--                },--%>
-<%--                error: function() {--%>
-<%--                    alert("An error occurred while deleting the category.");--%>
-<%--                }--%>
-<%--            });--%>
-<%--        });--%>
-<%--    });--%>
-<%--</script>--%>
+<script>
+    //hiển thị modal khi click vào btn category
+    $("#edit-category").click(function () {
+        var id = $(this).data("id");
+        $.get("/category/" + id + "/editCate", function (data) {
+            $("#edit-modal").html(data);
+            $("#edit-modal").show();
+        });
+    });
+    $("#edit-form").submit(function () {
+        var id = $("#edit-category-id").val();
+        var name = $("#name").val();
+        var description = $("#description").val();
+        $.ajax({
+            url: "/category/" + id + "/editCate",
+            type: "POST",
+            data: {
+                name: name,
+                description: description
+            },
+            success: function () {
+                location.reload();
+            },
+            error: function (error) {
+                alert("đã xảy ra lỗi");
+                alert("Error: " + error);
+            }
+        });
+        return false;
+    });
+</script>
 </body>
 </html>

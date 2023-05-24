@@ -23,6 +23,7 @@ public class HomeImpl implements IHome {
     private MenuDao menuDao;
     @Autowired
     private ProductDao productDao;
+
     @Override
     public List<Slides> getDataSlides() {
         return slidesDao.getDataSlides();
@@ -46,6 +47,21 @@ public class HomeImpl implements IHome {
     @Override
     public void delete(int id) {
         categoryDao.delete(id);
+    }
+
+    @Override
+    public void saveCate(Category category) {
+        categoryDao.saveCate(category);
+    }
+
+    @Override
+    public void updateCategory(Category category) {
+        categoryDao.updateCategory(category);
+    }
+
+    @Override
+    public Category getCategoryById(int id) {
+        return categoryDao.getCategoryById(id);
     }
 
 
