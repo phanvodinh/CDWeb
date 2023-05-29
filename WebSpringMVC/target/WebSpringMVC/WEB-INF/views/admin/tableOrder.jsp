@@ -117,12 +117,12 @@
 
             // Xác nhận việc xóa order
             if (confirm("Bạn có chắc chắn muốn xóa đơn hàng này?" + orderId)) {
-                // Gửi request DELETE đến URL /admin/category/${id}
+                // Gửi request DELETE đến URL /admin/order/id
                 $.ajax({
                     url: "/WebSpringMVC_war/admin/deleteOrder/" + orderId,
                     type: "GET",
                     success: function (response) {
-                        // Xóa category khỏi danh sách
+                        // Xóa order khỏi danh sách
                         $(orderId).closest("tr").remove();
                          location.reload(true);
                     },

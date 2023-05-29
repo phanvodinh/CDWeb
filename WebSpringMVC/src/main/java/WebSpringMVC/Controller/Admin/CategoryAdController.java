@@ -16,9 +16,6 @@ import java.util.List;
 public class CategoryAdController {
     @Autowired
     HomeImpl home;
-//    @Autowired
-//    CateRepo repo;
-
 
 
 //    @GetMapping("order")

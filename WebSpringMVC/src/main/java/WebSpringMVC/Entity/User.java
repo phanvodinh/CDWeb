@@ -1,6 +1,11 @@
 package WebSpringMVC.Entity;
 
 
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collection;
+import java.util.List;
+
 public class User {
 
     private long id;
@@ -12,6 +17,8 @@ public class User {
     private String displayName;
 
     private String address;
+    private List<GrantedAuthority> authorities;
+    private String role;
 
     public User() {
     }
@@ -22,6 +29,19 @@ public class User {
         this.password = password;
         this.displayName = displayName;
         this.address = address;
+    }
+
+    public User(long id, String user, String password, String displayName, String address, String role) {
+        this.id = id;
+        this.user = user;
+        this.password = password;
+        this.displayName = displayName;
+        this.address = address;
+        this.role = role;
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
     }
 
     public long getId() {
@@ -44,6 +64,7 @@ public class User {
         return password;
     }
 
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -62,6 +83,14 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override

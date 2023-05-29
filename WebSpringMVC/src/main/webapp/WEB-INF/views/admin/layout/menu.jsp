@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <aside class="app-sidebar">
     <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/hay.jpg" width="50px"
                                         alt="User Image">
@@ -18,12 +19,13 @@
     <ul class="app-menu">
         <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
             <span class="app-menu__label">POS Bán Hàng</span></a></li>
-        <li><a class="app-menu__item active " href="index.html"><i class='app-menu__icon bx bx-tachometer'></i><span
+        <li><a class="app-menu__item active " href="<c:url value="/admin/main"/>"><i
+                class='app-menu__icon bx bx-tachometer'></i><span
                 class="app-menu__label">Bảng điều khiển</span></a></li>
-        <li><a class="app-menu__item " href="table-data-table.html"><i class='app-menu__icon bx bx-id-card'></i>
-            <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-        <li><a class="app-menu__item " href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
-                class="app-menu__label">Quản lý khách hàng</span></a></li>
+        <%--        <li><a class="app-menu__item " href="table-data-table.html"><i class='app-menu__icon bx bx-id-card'></i>--%>
+        <%--            <span class="app-menu__label">Quản lý nhân viên</span></a></li>--%>
+        <%--        <li><a class="app-menu__item " href="#"><i class='app-menu__icon bx bx-user-voice'></i><span--%>
+        <%--                class="app-menu__label">Quản lý khách hàng</span></a></li>--%>
         <li><a class="app-menu__item " href="<c:url value="/admin/listProduct"/>"><i
                 class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
         </li>
@@ -34,14 +36,16 @@
                 class='app-menu__icon bx bx-run'></i><span
                 class="app-menu__label">Quản lý danh mục
           </span></a></li>
-        <li><a class="app-menu__item" href="table-data-money.html"><i class='app-menu__icon bx bx-dollar'></i><span
-                class="app-menu__label">Bảng kê lương</span></a></li>
-        <li><a class="app-menu__item" href="quan-ly-bao-cao.html"><i
-                class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Báo cáo doanh thu</span></a>
-        </li>
-        <li><a class="app-menu__item" href="page-calendar.html"><i class='app-menu__icon bx bx-calendar-check'></i><span
-                class="app-menu__label">Lịch công tác </span></a></li>
-        <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Cài
-            đặt hệ thống</span></a></li>
+        <%--        <li><a class="app-menu__item" href="table-data-money.html"><i class='app-menu__icon bx bx-dollar'></i><span--%>
+        <%--                class="app-menu__label">Bảng kê lương</span></a></li>--%>
+        <%--        <li><a class="app-menu__item" href="quan-ly-bao-cao.html"><i--%>
+        <%--                class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Báo cáo doanh thu</span></a>--%>
+        <%--        </li>--%>
+        <%--        <li><a class="app-menu__item" href="page-calendar.html"><i class='app-menu__icon bx bx-calendar-check'></i><span--%>
+        <%--                class="app-menu__label">Lịch công tác </span></a></li>--%>
+        <security:authorize access="isAuthenticated()">
+            <li><a class="app-menu__item" href="<c:url value="/admin/logout"/>"><i class='app-menu__icon bx bx-cog'></i><span
+                    class="app-menu__label">Thoát </span></a></li>
+        </security:authorize>
     </ul>
 </aside>
